@@ -1,18 +1,37 @@
-document.addEventListener('keydown', function(event) {
-    const box = document.getElementById('block');
-    if (isNaN(parseInt(box.style.left))) box.style.left = '0px';
-    if (isNaN(parseInt(box.style.top))) box.style.top = '0px';
+var keyboard_query = {};
 
-    if(event.keyCode == 37) {
-        box.style.left = parseInt(box.style.left) - 5 + 'px';
+function keyboard_handler(){
+    for (let key in keyboard_query){
+        if(keyboard_query[key] == true){
+            const box = document.getElementById('block');
+            if (isNaN(parseInt(box.style.left))) box.style.left = '0px';
+            if (isNaN(parseInt(box.style.top))) box.style.top = '0px';
+
+            if(key == 37) {
+                box.style.left = parseInt(box.style.left) - 5 + 'px';
+            }
+            else if(key == 39) {
+                box.style.left = parseInt(box.style.left) + 5 + 'px';
+            }
+            else if(key == 38) {
+                box.style.top = parseInt(box.style.top) - 5 + 'px';
+            }
+            else if(key == 40) {
+                box.style.top = parseInt(box.style.top) + 5 + 'px';
+            }
+        }
+        else delete keyboard_query[key];
     }
-    else if(event.keyCode == 39) {
-        box.style.left = parseInt(box.style.left) + 5 + 'px';
-    }
-    else if(event.keyCode == 38) {
-        box.style.top = parseInt(box.style.top) - 5 + 'px';
-    }
-    else if(event.keyCode == 40) {
-        box.style.top = parseInt(box.style.top) + 5 + 'px';
-    }
-});
+}
+
+function game_keydown(event) {
+    keyboard_query[event.keyCode] = true;
+}
+
+function game_keyup(event) {
+    keyboard_query[event.keyCode] = false;
+}
+
+function game_visible(event) {
+    //console.log(document.visibilityState);
+}
