@@ -1,6 +1,20 @@
 .block{
     width: 100px;
     height: 100px;
-    background: black;
+    /* background: black; */
     position: absolute;
+    background-image: url("sprites/hero_idle.png");
+    background-size: 100px;
+    
+
+}
+body{
+    background-image: url("sprites/bg1.png");
+}
+.enemy{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-image: url("sprites/enemy1.png");
+    background-size: 100px;
 }

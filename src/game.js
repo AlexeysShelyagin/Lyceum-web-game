@@ -1,4 +1,5 @@
 import { Player } from "./entities.js"
+import { Enemy } from "./entities.js"
 import { game_keydown, game_keyup, game_visible, keyboard_handler } from "./keyboard.js"
 
 import { maps } from "../resource/map.js"
@@ -46,7 +47,10 @@ class Map{
 export class Game{
     pause = false;
     player;
+    enemies;
+    enemiesSpeed;
     map;
+    inp;
 
     constructor() {
         let map_name = 'map1';
@@ -54,15 +58,40 @@ export class Game{
         // TODO: add map selecting
         this.map = new Map(maps[map_name]);
         this.player = new Player(maps[map_name]['start_pos'], 10);
-
+        this.enemies = new Array();
+        this.enemiesSpeed = 2;
         document.addEventListener('keydown', game_keydown);
         document.addEventListener('keyup', game_keyup);
         document.addEventListener('visibilitychange', game_visible)
+        this.inp = new vec2(0,0);
     }
 
     game_loop() {
-        keyboard_handler();
+        this.inp = keyboard_handler();
 
+        this.gameUpdate();
         requestAnimationFrame(this.game_loop.bind(this));
+    }
+
+    
+    spawnEnemy(pos){
+        let htmlBox = document.createElement("div");
+        htmlBox.classList.add("enemy");
+        document.body.appendChild(htmlBox);
+        let enemy = new Enemy(pos, 10, 2, htmlBox);
+        enemy.moveTo(500,500,50);
+        this.enemies.push(enemy);
+        
+        
+    }
+
+    gameUpdate(){
+        for(let enemy of this.enemies){
+            if(!enemy.isDead)
+                enemy.moveTo(this.player.pos.x, this.player.pos.y, this.enemiesSpeed);
+        }
+        
+        this.player.pos = this.player.pos.sum(this.inp.mult(5));
+
     }
 }

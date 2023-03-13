@@ -1,3 +1,5 @@
+import { Player } from "./entities.js"
+import { vec2 } from "./vectors.js";
 var keyboard_query = {};
 
 function keyboard_handler(){
@@ -9,19 +11,24 @@ function keyboard_handler(){
 
             if(key == 65) {
                 box.style.left = parseInt(box.style.left) - 5 + 'px';
+                return new vec2(-1,0);
             }
             else if(key == 68) {
                 box.style.left = parseInt(box.style.left) + 5 + 'px';
+                return new vec2(1,0);
             }
             else if(key == 87) {
                 box.style.top = parseInt(box.style.top) - 5 + 'px';
+                return new vec2(0,-1);
             }
             else if(key == 83) {
                 box.style.top = parseInt(box.style.top) + 5 + 'px';
+                return new vec2(0,1);
             }
         }
         else delete keyboard_query[key];
     }
+    return new vec2(0,0);
 }
 
 function game_keydown(event) {
