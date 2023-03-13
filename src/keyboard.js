@@ -7,16 +7,16 @@ function keyboard_handler(){
             if (isNaN(parseInt(box.style.left))) box.style.left = '0px';
             if (isNaN(parseInt(box.style.top))) box.style.top = '0px';
 
-            if(key == 37) {
+            if(key == 65) {
                 box.style.left = parseInt(box.style.left) - 5 + 'px';
             }
-            else if(key == 39) {
+            else if(key == 68) {
                 box.style.left = parseInt(box.style.left) + 5 + 'px';
             }
-            else if(key == 38) {
+            else if(key == 87) {
                 box.style.top = parseInt(box.style.top) - 5 + 'px';
             }
-            else if(key == 40) {
+            else if(key == 83) {
                 box.style.top = parseInt(box.style.top) + 5 + 'px';
             }
         }

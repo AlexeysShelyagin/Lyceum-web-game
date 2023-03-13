@@ -1,7 +1,16 @@
+class Map{
+    width;
+    height;
+    field = [];
+}
+
 class Game{
     pause = false;
-    
+    player;
+
     constructor() {
+        this.player = new Player(10);
+
         document.addEventListener('keydown', game_keydown);
         document.addEventListener('keyup', game_keyup);
         document.addEventListener('visibilitychange', game_visible)
