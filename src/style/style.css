@@ -1,0 +1,21 @@
+.block{
+    width: 100px;
+    height: 100px;
+    background: black;
+    position: absolute;
+}
+
+body{
+    min-height: 100%;
+    background: #080808;
+}
+
+.screen_field{
+    width: 100%;
+}
+
+.header{
+    height: 20%;
+}
+
+canvas#test { border: 1px solid white; width: 500px; }
