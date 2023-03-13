@@ -1,15 +1,22 @@
+html { overflow:  hidden; }
 .block{
     width: 100px;
     height: 100px;
     /* background: black; */
     position: absolute;
-    background-image: url("sprites/hero_idle.png");
+    /* background-image: url("sprites/hero_idle.png"); */
     background-size: 100px;
     
 
 }
+.player-facing-right{
+    background-image: url("sprites/hero_idle.png");
+}
+.player-facing-left{
+    background-image: url("sprites/hero_idle_left.png");
+}
 body{
-    background-image: url("sprites/bg1.png");
+    background-image: url("sprites/bg2.png");
 }
 .enemy{
     width: 100px;
@@ -17,4 +24,11 @@ body{
     position: absolute;
     background-image: url("sprites/enemy1.png");
     background-size: 100px;
+}
+.magicBall{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-image: url("sprites/magicBall.png");
+    background-size: 50px;
 }
