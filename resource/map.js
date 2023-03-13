@@ -3,6 +3,7 @@ export let maps = {
         "size": [40, 30],
         "start_pos": [20, 15],
 
+        "tiles_on_screen": 20, 
         "default_tile": "grass",
         "tiles": {
             "rock": [
