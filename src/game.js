@@ -1,15 +1,21 @@
-class Map{
+import { Player } from "./entities.js"
+import { game_keydown, game_keyup, game_visible, keyboard_handler } from "./keyboard.js"
+
+import { map_file } from "../resource/map.js"
+
+export class Map{
     width;
     height;
     field = [];
 }
 
-class Game{
+export class Game{
     pause = false;
     player;
 
     constructor() {
         this.player = new Player(10);
+        console.log(map_file);
 
         document.addEventListener('keydown', game_keydown);
         document.addEventListener('keyup', game_keyup);
@@ -22,7 +28,3 @@ class Game{
         requestAnimationFrame(this.game_loop.bind(this));
     }
 }
-
-let game = new Game();
-
-game.game_loop();

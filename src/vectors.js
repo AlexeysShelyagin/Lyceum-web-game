@@ -1,4 +1,4 @@
-class vec2{
+export class vec2{
     x;
     y;
     constructor (x = 0, y = 0){

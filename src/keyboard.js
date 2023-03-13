@@ -35,3 +35,5 @@ function game_keyup(event) {
 function game_visible(event) {
     //console.log(document.visibilityState);
 }
+
+export {keyboard_handler, game_keydown, game_keyup, game_visible}
