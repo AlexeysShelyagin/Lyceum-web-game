@@ -6,7 +6,8 @@ export class Player{
     health;
     max_health;
 
-    constructor (health) {
+    constructor (center, health) {
+        this.pos = new vec2(center[0], center[1]);
         this.health = this.max_health = health;
     }
 }
