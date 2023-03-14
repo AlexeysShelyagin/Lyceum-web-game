@@ -6,7 +6,8 @@ html { overflow:  hidden; }
     position: absolute;
     /* background-image: url("sprites/hero_idle.png"); */
     background-size: 100px;
-    
+    left: 0;
+    top: 0;
 
 }
 .player-facing-right{
