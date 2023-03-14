@@ -1,8 +1,9 @@
 export let maps = {
     "map1": {
-        "size": [40, 30],
-        "start_pos": [20, 15],
+        "size": [20, 10],
+        "start_pos": [2, 2],
 
+        "tiles_on_screen": 20, 
         "default_tile": "grass",
         "tiles": {
             "rock": [

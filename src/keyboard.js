@@ -1,27 +1,31 @@
+import { vec2 } from "./vectors.js";
+
 var keyboard_query = {};
 
 function keyboard_handler(){
+    let dir = new vec2(0, 0);
+    
     for (let key in keyboard_query){
         if(keyboard_query[key] == true){
-            const box = document.getElementById('block');
-            if (isNaN(parseInt(box.style.left))) box.style.left = '0px';
-            if (isNaN(parseInt(box.style.top))) box.style.top = '0px';
 
-            if(key == 65) {
-                box.style.left = parseInt(box.style.left) - 5 + 'px';
+            if(key == 65) { //a
+                dir = dir.sum(new vec2(-1, 0));
             }
-            else if(key == 68) {
-                box.style.left = parseInt(box.style.left) + 5 + 'px';
+            else if(key == 68) { //d
+                dir = dir.sum(new vec2(1, 0));
             }
-            else if(key == 87) {
-                box.style.top = parseInt(box.style.top) - 5 + 'px';
+            else if(key == 87) { //w
+                dir = dir.sum(new vec2(0, -1));
             }
-            else if(key == 83) {
-                box.style.top = parseInt(box.style.top) + 5 + 'px';
+            else if(key == 83) { //s
+                dir = dir.sum(new vec2(0, 1));
             }
         }
         else delete keyboard_query[key];
     }
+
+    dir.normalize();
+    return dir;
 }
 
 function game_keydown(event) {

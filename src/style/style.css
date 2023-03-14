@@ -1,21 +1,24 @@
-.block{
-    width: 100px;
-    height: 100px;
-    background: black;
-    position: absolute;
+html{
+    height: 100%;
 }
 
 body{
-    min-height: 100%;
+    margin: 0;
+    height: 100%;
     background: #080808;
 }
 
 .screen_field{
-    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 2%;
+    height: 100%;
 }
 
 .header{
-    height: 20%;
+    height: 10%;
 }
 
-canvas#test { border: 1px solid white; width: 500px; }
+.game_screen{
+    border: 3px solid white;
+}
