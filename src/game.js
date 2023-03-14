@@ -100,6 +100,10 @@ export class Game{
                 this.call_down = this.frame;
                 this.spawn_ball(this.player.pos, key_report[0], this.map.ball_damage);
             }
+            if(key_report[1] == 'esc'){
+                this.pause = !this.pause;
+                window.open("./index.html", "_self");
+            }
 
             
             for (let i = 0; i < this.entities.length; i++){
@@ -112,7 +116,7 @@ export class Game{
 
             this.player.check_colision(this.map.width, this.map.height, this.entities);
             this.player.move();
-            
+
             render(this.map, this.player, this.entities);
             render_hud(this.player, this.frame - this.call_down);
 

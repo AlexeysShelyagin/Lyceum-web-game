@@ -24,6 +24,9 @@ function keyboard_handler(){
             else if(key == 32) { //space
                 res = 'fire';
             }
+            else if(key == 27) { //esc
+                res = 'esc';
+            }
         }
         else delete keyboard_query[key];
     }

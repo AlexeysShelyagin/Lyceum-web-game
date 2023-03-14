@@ -14,13 +14,13 @@ export let maps = {
         
         "entities": {
             "ghosts": {
-                "spawn_rate": 400,
+                "spawn_rate": 150,
                 "health": 3,
                 "damage": 1
             },
             "player": {
-                "health": 5,
-                "call_down": 100
+                "health": 10,
+                "call_down": 35
             },
             "ball": {
                 "damage": 1
