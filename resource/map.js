@@ -13,7 +13,18 @@ export let maps = {
         },
         
         "entities": {
-            "ghost": [3, 5]
+            "ghosts": {
+                "spawn_rate": 400,
+                "health": 3,
+                "damage": 1
+            },
+            "player": {
+                "health": 5,
+                "call_down": 100
+            },
+            "ball": {
+                "damage": 1
+            }
         }
     }
 }

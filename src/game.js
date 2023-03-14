@@ -1,4 +1,4 @@
-import { Player } from "./entities.js"
+import { Player, Enemy, MagicBall } from "./entities.js"
 import { game_keydown, game_keyup, game_visible, keyboard_handler } from "./keyboard.js"
 
 import { maps } from "../resource/map.js"
@@ -19,6 +19,11 @@ export class Map{
     height;
     tiles_vis;
     field = [];
+    spawn_rate;
+
+    player_health; player_call_down;
+    enemy_health; enemy_damage;
+    ball_damage;
 
     constructor (map_file){
         this.width = map_file['size'][0];
@@ -43,6 +48,13 @@ export class Map{
                 this.field[cur_tile[j][0]][cur_tile[j][1]] = tile_n;
             }
         }
+
+        this.spawn_rate = map_file['entities']['ghosts']['spawn_rate'];
+        this.enemy_damage = map_file['entities']['ghosts']['damage'];
+        this.enemy_health = map_file['entities']['ghosts']['health'];
+        this.player_health = map_file['entities']['player']['health'];
+        this.player_call_down = map_file['entities']['player']['call_down'];
+        this.ball_damage = map_file['entities']['ball']['damage'];
     }
 }
 
@@ -50,14 +62,16 @@ export class Game{
     pause = false;
     player;
     map;
-    frame
+    frame;
+    call_down = -200;
+    entities = [];
 
     constructor() {
         let map_name = 'map1';
         //let map_name = prompt('enter the map name');
         // TODO: add map selecting
         this.map = new Map(maps[map_name]);
-        this.player = new Player(maps[map_name]['start_pos'], 10);
+        this.player = new Player(maps[map_name]['start_pos'], this.map.player_health, this.map.player_call_down);
 
         render_init(this.map);
         this.frame = 0;
@@ -70,19 +84,59 @@ export class Game{
 
     game_loop() {
         this.frame++;
-        if(load_status == 3){
-            let vel = keyboard_handler();
-            vel = vel.mult(0.1);
+        if(load_status == 5){ 
+            if (((this.frame - 10) % this.map.spawn_rate) == 0){
+                this.spawn_enemy(new vec2(
+                    Math.random() * this.map.width,
+                    Math.random() * this.map.height
+                ), this.map.enemy_health, this.map.enemy_damage);
+            }
+
+            let key_report = keyboard_handler();
+            let vel = key_report[0].mult(0.1);
             this.player.vel = vel;
+            
+            if (key_report[1] == 'fire' && this.call_down + this.player.call_down <= this.frame){
+                this.call_down = this.frame;
+                this.spawn_ball(this.player.pos, key_report[0], this.map.ball_damage);
+            }
 
-            this.player.check_bounding(this.map.width, this.map.height);
-            this.player.move_player()
+            
+            for (let i = 0; i < this.entities.length; i++){
+                this.entities[i][0].ent_ai(this.player, this.entities);
+            }
 
-            render(this.map, this.player);
+            for (let i = 0; i < this.entities.length; i++){
+                if(this.entities[i][0].isDead) this.entities.splice(i, 1);
+            }
+
+            this.player.check_colision(this.map.width, this.map.height, this.entities);
+            this.player.move();
+
+            render(this.map, this.player, this.entities);
 
             this.player.vel = new vec2();
         }
 
-        requestAnimationFrame(this.game_loop.bind(this));
+        if(!this.player.isDead){
+            requestAnimationFrame(this.game_loop.bind(this));
+        }
+        else alert('You are dead :(');
+    }
+
+    spawn_enemy (pos, health, damage){
+        this.entities.push( 
+            [new Enemy(pos, health, damage), 'enemy']
+        );
+    }
+
+    spawn_ball (pos, dir, damage){
+        if (dir.mod() == 0){
+            this.call_down -= 150;
+            return;
+        }
+        this.entities.push(
+            [new MagicBall(pos, dir, damage), 'ball']
+        )
     }
 }

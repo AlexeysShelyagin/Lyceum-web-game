@@ -4,6 +4,7 @@ var keyboard_query = {};
 
 function keyboard_handler(){
     let dir = new vec2(0, 0);
+    let res = '';
     
     for (let key in keyboard_query){
         if(keyboard_query[key] == true){
@@ -20,12 +21,15 @@ function keyboard_handler(){
             else if(key == 83) { //s
                 dir = dir.sum(new vec2(0, 1));
             }
+            else if(key == 32) { //space
+                res = 'fire';
+            }
         }
         else delete keyboard_query[key];
     }
 
     dir.normalize();
-    return dir;
+    return [dir, res];
 }
 
 function game_keydown(event) {

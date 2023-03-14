@@ -35,6 +35,18 @@ export function render_init (map){
     };
     sprites['player'].src = '../sprites/hero_idle.png';
 
+    sprites['enemy'] = new Image();
+    sprites['enemy'].onload = function (){
+        load_status ++;
+    };
+    sprites['enemy'].src = '../sprites/enemy1.png';
+
+    sprites['ball'] = new Image();
+    sprites['ball'].onload = function (){
+        load_status ++;
+    };
+    sprites['ball'].src = '../sprites/magicBall.png';
+
     tiles_vis = map.tiles_vis;
     aspect_ratio = map.width / map.height;
     fit_canvas();
@@ -47,7 +59,7 @@ export function render_init (map){
     }
 }
 
-export function render (map, player){
+export function render (map, player, entities){
     for (let i = 0; i < map.width; i++){
         for(let j = 0; j < map.height; j++){
             cx.drawImage(sprites[bg_map[i][j]], i*scale, j*scale, scale, scale);
@@ -56,4 +68,9 @@ export function render (map, player){
 
     let p_x = player.pos.x, p_y = player.pos.y;
     cx.drawImage(sprites['player'], p_x * scale, p_y * scale, scale, scale);
+
+    for(let i = 0; i < entities.length; i++){
+        let e_x = entities[i][0].pos.x, e_y = entities[i][0].pos.y;
+        cx.drawImage(sprites[entities[i][1]], e_x * scale, e_y * scale, scale, scale);
+    }
 }
