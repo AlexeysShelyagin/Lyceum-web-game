@@ -11,10 +11,10 @@ html{
 
     margin: 15px;
     font-size: 25px;
-    border-width: 3px;
+    border-width: 2px;
     border-radius: 10px;
     border-style: solid;
-    border-color: black;
+    border-color: rgb(49, 49, 49);
     padding: 20px;
     width: 400px;
     display: flex;
@@ -22,7 +22,7 @@ html{
     justify-content: center;
     align-items:center;
 
-    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.3   5);
 
 }
 .play-btn{
