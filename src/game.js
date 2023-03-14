@@ -3,7 +3,7 @@ import { game_keydown, game_keyup, game_visible, keyboard_handler } from "./keyb
 
 import { maps } from "../resource/map.js"
 import { vec2 } from "./vectors.js";
-import { render_init, render, load_status } from "./rendering.js";
+import { render_init, render, load_status, fit_canvas } from "./rendering.js";
 
 let tile_list = [
     'grass', 'rock'
@@ -59,19 +59,28 @@ export class Game{
         this.map = new Map(maps[map_name]);
         this.player = new Player(maps[map_name]['start_pos'], 10);
 
-        render_init();
+        render_init(this.map);
         this.frame = 0;
 
         document.addEventListener('keydown', game_keydown);
         document.addEventListener('keyup', game_keyup);
-        document.addEventListener('visibilitychange', game_visible)
+        document.addEventListener('visibilitychange', game_visible);
+        window.addEventListener('resize', fit_canvas);
     }
 
     game_loop() {
         this.frame++;
-        if(load_status == 1){
-            keyboard_handler();
-            render(this.map, this.frame);
+        if(load_status == 3){
+            let vel = keyboard_handler();
+            vel = vel.mult(0.1);
+            this.player.vel = vel;
+
+            this.player.check_bounding(this.map.width, this.map.height);
+            this.player.move_player()
+
+            render(this.map, this.player);
+
+            this.player.vel = new vec2();
         }
 
         requestAnimationFrame(this.game_loop.bind(this));

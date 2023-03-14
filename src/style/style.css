@@ -1,10 +1,3 @@
-.block{
-    width: 100px;
-    height: 100px;
-    background: black;
-    position: absolute;
-}
-
 html{
     height: 100%;
 }
@@ -27,6 +20,5 @@ body{
 }
 
 .game_screen{
-    height: 70%;
     border: 3px solid white;
 }

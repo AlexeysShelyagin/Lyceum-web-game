@@ -24,6 +24,7 @@ export class vec2{
 
     normalize (){
         let mod = this.mod();
+        if (mod == 0) return new vec2(0, 0);
         this.x /= mod;
         this.y /= mod;
         return new vec2(this.x, this.y);
