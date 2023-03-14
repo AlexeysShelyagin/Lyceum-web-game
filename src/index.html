@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style/style.css">
+		<title>Ghost survivor</title>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
@@ -11,7 +12,15 @@
 	<body>
 		<div class="screen_field">
 			<div class="header">
-
+				<div class="up_divider"></div>
+				<div class="hud">
+					<div class="hp_bar" id="hp_bar">
+						<canvas id="hp"></canvas>
+					</div>
+					<div class="energy_bar" id="energy_bar">
+						<canvas id="energy"></canvas>
+					</div>
+				</div>
 			</div>
 			<div class="game_screen" id="game_screen">
 				<canvas id="game"></canvas>

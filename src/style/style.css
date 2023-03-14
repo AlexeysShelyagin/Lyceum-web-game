@@ -22,3 +22,21 @@ body{
 .game_screen{
     border: 3px solid white;
 }
+
+.up_divider{
+    height: 30%;
+}
+
+.hud{
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hp_bar{
+    width: 15%;
+}
+
+.energy_bar{
+    width: 30%;
+}

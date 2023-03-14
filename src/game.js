@@ -3,7 +3,7 @@ import { game_keydown, game_keyup, game_visible, keyboard_handler } from "./keyb
 
 import { maps } from "../resource/map.js"
 import { vec2 } from "./vectors.js";
-import { render_init, render, load_status, fit_canvas } from "./rendering.js";
+import { render_init, render, load_status, fit_canvas, render_hud } from "./rendering.js";
 
 let tile_list = [
     'grass', 'rock'
@@ -112,8 +112,9 @@ export class Game{
 
             this.player.check_colision(this.map.width, this.map.height, this.entities);
             this.player.move();
-
+            
             render(this.map, this.player, this.entities);
+            render_hud(this.player, this.frame - this.call_down);
 
             this.player.vel = new vec2();
         }
@@ -121,7 +122,10 @@ export class Game{
         if(!this.player.isDead){
             requestAnimationFrame(this.game_loop.bind(this));
         }
-        else alert('You are dead :(');
+        else{
+            render_hud(this.player, this.frame - this.call_down);
+            alert('You are dead :(');
+        }
     }
 
     spawn_enemy (pos, health, damage){
